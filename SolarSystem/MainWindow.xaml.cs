@@ -79,11 +79,11 @@ namespace SolarSystem
 
             var earthArroundSunRotation = new AxisAngleRotation3D(new Vector3D(0, 1, 0), 0);
 
-            var transformGroup = new Transform3DGroup();
-            transformGroup.Children.Add(new TranslateTransform3D(150, 0, 0));
-            transformGroup.Children.Add(new RotateTransform3D(earthArroundSunRotation));
+            var earthTransformGroup = new Transform3DGroup();
+            earthTransformGroup.Children.Add(new TranslateTransform3D(150, 0, 0));
+            earthTransformGroup.Children.Add(new RotateTransform3D(earthArroundSunRotation));
 
-            earthGroup.Transform = transformGroup;
+            earthGroup.Transform = earthTransformGroup;
 
             sunGroup.Children.Add(earthGroup);
 
