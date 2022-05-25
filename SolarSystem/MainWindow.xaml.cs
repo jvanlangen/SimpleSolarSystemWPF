@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Media.Media3D;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace SolarSystem
 {
@@ -23,18 +11,22 @@ namespace SolarSystem
     /// </summary>
     public partial class MainWindow : Window
     {
-        private double _sunSize = 70.0;
-        private double _earthSize = 20.0;
-        private double _moonSize = 10.0;
+        private const double _sunSize = 70.0;
+        private const double _earthSize = 20.0;
+        private const double _moonSize = 10.0;
 
-        private double _earthDistance = 150.0;
-        private double _moonDistance = 40.0;
-
+        private const double _earthDistance = 150.0;
+        private const double _moonDistance = 40.0;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            SetupScene();
+        }
+
+        private void SetupScene()
+        {
             // Create a low-res Sphere (to see the rotations better. It's the vertexbuffer on the videocard)
             var sphere = MeshPrimitives.Sphere(5, 1);
 
@@ -94,7 +86,7 @@ namespace SolarSystem
             {
                 Material = earthMaterial,
                 Geometry = sphere,
-                Transform = earthScaleRotate 
+                Transform = earthScaleRotate
             };
 
             // now we create a new group where the earth and mood are added.
@@ -163,8 +155,10 @@ namespace SolarSystem
             // hiarchy thing! add the moon to the earthgroup.
             earthGroup.Children.Add(moonGroup);
 
+
             // put the model into the Viewport3D
             Viewport3D.Children.Add(new ModelVisual3D { Content = sunGroup });
+
 
             // use a stopwatch (wpf don't render 100% on 60 fps)
             // a stopwatch gives better results.
@@ -173,14 +167,16 @@ namespace SolarSystem
             // trigger each frame rendering. 
             CompositionTarget.Rendering += (s, ee) =>
             {
+                // get a snapshot of the current time.
                 var time = sw.ElapsedMilliseconds;
+
                 earthRotation.Angle = time / 6.0;
                 earthArroundSunRotation.Angle = time / 24.0;
 
-                moonRotation.Angle = time / 15.0; 
-                moonArroundEarthRotation.Angle = time / 4.0; 
+                moonRotation.Angle = time / 15.0;
+                moonArroundEarthRotation.Angle = time / 4.0;
 
-                sunRotation.Angle = -time / 7.0; 
+                sunRotation.Angle = -time / 7.0;
             };
         }
     }
