@@ -20,7 +20,7 @@ Just a simple solar system in WPF Viewport3D
  	     |	
          +- earthGroup : Model3DGroup
              |
-             +- Transform = earthTransformGroup
+             +- Transform = earthTransformGroup : Transform3DGroup
              |               |
              |               +- ScaleTransform : ScaleTransform3D
              |               |
@@ -42,7 +42,7 @@ Just a simple solar system in WPF Viewport3D
                  |
                  +- moonGroup : Model3DGroup
                      |
-                     +- Transform = moonTransformGroup
+                     +- Transform = moonTransformGroup : Transform3DGroup
                      |               |
                      |               +- ScaleTransform : ScaleTransform3D
                      |               |
