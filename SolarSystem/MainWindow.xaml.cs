@@ -23,9 +23,12 @@ namespace SolarSystem
     /// </summary>
     public partial class MainWindow : Window
     {
-        private double _sunSize = 70;
-        private double _earthSize = 20;
-        private double _moonSize = 10;
+        private double _sunSize = 70.0;
+        private double _earthSize = 20.0;
+        private double _moonSize = 10.0;
+
+        private double _earthDistance = 150.0;
+        private double _moonDistance = 40.0;
 
 
         public MainWindow()
@@ -107,7 +110,7 @@ namespace SolarSystem
             // here comes the trick. If you translate first and then rotate, it will be a big
             // elipse. If you rotate first and then translate. the earth is translated and rotate on it self.
             // so first translate, then rotate.
-            earthTransformGroup.Children.Add(new TranslateTransform3D(150, 0, 0));
+            earthTransformGroup.Children.Add(new TranslateTransform3D(_earthDistance, 0, 0));
             earthTransformGroup.Children.Add(new RotateTransform3D(earthArroundSunRotation));
 
             // Assign the transform group to the earthgroup.
@@ -151,7 +154,7 @@ namespace SolarSystem
             // create transform group for the moon
             var moonTransformGroup = new Transform3DGroup();
             // first translate, then rotate!
-            moonTransformGroup.Children.Add(new TranslateTransform3D(40, 0, 0));
+            moonTransformGroup.Children.Add(new TranslateTransform3D(_moonDistance, 0, 0));
             moonTransformGroup.Children.Add(new RotateTransform3D(moonArroundEarthRotation));
 
             // add the transform group to the moonGroup
